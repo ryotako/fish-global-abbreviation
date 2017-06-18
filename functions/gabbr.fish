@@ -18,6 +18,7 @@ Usage:
 Options:
     -a, --add       Add abbreviation
     -e, --erase     Erase abbreviation
+    -f, --function  Add function-abbreviation
     -l, --list      Print all abbreviation names
     -s, --show      Print all abbreviations
     -h, --help      Help

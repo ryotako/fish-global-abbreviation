@@ -29,6 +29,10 @@ gabbr (-l|--list)
 
 # erase abbreviation
 gabbr (-e|--erase)
+
+# add function-abbreviation
+# Function-abbreviations are evaluated when it is expanded.
+gabbr (-f|--function) D 'date +%Y/%m/%d'
 ```
 
 [travis-link]: https://travis-ci.org/ryotako/fish-global-abbreviation
