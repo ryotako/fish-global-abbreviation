@@ -6,7 +6,7 @@ function gabbr -d 'Global abbreviation for fish'
     while count $argv >/dev/null
         switch $argv[1]
             case -{a,f,s,l,e} --{add,function,show,list,erase}
-                set opts $opt $argv[1]
+                set opts $opts $argv[1]
 
             case -h --help
                 string trim "
