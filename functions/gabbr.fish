@@ -111,15 +111,17 @@ Options:
             end
 
         case -e --erase
-            if contains "$args[1]" (gabbr --list)
-                for i in (seq (count $global_abbreviations) 1)
-                    echo "$global_abbreviations[$i]" | read word _
-                    if test "$word" = "$args[1]"
-                        set -e global_abbreviations[$i]
+            for arg in $args
+                if contains "$arg" (gabbr --list)
+                    for i in (seq (count $global_abbreviations) 1)
+                        echo "$global_abbreviations[$i]" | read word _
+                        if test "$word" = "$arg"
+                            set -e global_abbreviations[$i]
+                        end
                     end
+                else
+                    echo "$_: no such abbreviation '$arg'" >&2
                 end
-            else
-                echo "$_: no such abbreviation '$args[1]'" >&2
             end
     end
 end
