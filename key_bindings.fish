@@ -1,1 +1,1 @@
-bind ' ' "__gabbr_expand; commandline -i ' '"
+bind ' ' '__gabbr_expand; commandline -i " "'
