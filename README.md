@@ -2,7 +2,9 @@
 
 [![Slack Room][slack-badge]][slack-link]
 
-global abbreviation for fish shell
+Global abbreviation for fish shell
+
+![demo.gif](demo.gif)
 
 ## Install
 
@@ -30,7 +32,7 @@ gabbr (-l|--list)
 gabbr (-e|--erase)
 
 # add function-abbreviation
-# Function-abbreviations are evaluated when it is expanded.
+# Function-abbreviations are evaluated when they are expanded.
 gabbr (-f|--function) D 'date +%Y/%m/%d'
 ```
 
