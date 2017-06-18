@@ -1,6 +1,5 @@
 # fish-global-abbreviation
 
-[![Build Status][travis-badge]][travis-link]
 [![Slack Room][slack-badge]][slack-link]
 
 global abbreviation for fish shell
@@ -35,8 +34,6 @@ gabbr (-e|--erase)
 gabbr (-f|--function) D 'date +%Y/%m/%d'
 ```
 
-[travis-link]: https://travis-ci.org/ryotako/fish-global-abbreviation
-[travis-badge]: https://img.shields.io/travis/ryotako/fish-global-abbreviation.svg
 [slack-link]: https://fisherman-wharf.herokuapp.com
 [slack-badge]: https://fisherman-wharf.herokuapp.com/badge.svg
 [fisherman]: https://github.com/fisherman/fisherman
