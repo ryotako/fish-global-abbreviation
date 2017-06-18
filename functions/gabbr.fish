@@ -31,6 +31,7 @@ Options:
                 end
             case '-*'
                 echo "$_: invalid option -- $argv[1]" >&2
+                return 1
             case '*'
                 set args $args $argv[1]
         end
