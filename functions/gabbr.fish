@@ -5,7 +5,7 @@ function gabbr -d 'Global abbreviation for fish'
     set -l args
     while count $argv >/dev/null
         switch $argv[1]
-            case -{a,f,s,l,e} --{add,function,show,list,erase}
+            case -{a,f,s,l,e,r} --{add,function,show,list,erase,reload}
                 set opts $opts $argv[1]
 
             case -h --help
@@ -21,6 +21,7 @@ Options:
     -f, --function  Add function-abbreviation
     -l, --list      Print all abbreviation names
     -s, --show      Print all abbreviations
+    -r, --realod    Reload all abbreviations from your config file
     -h, --help      Help
 "
                 return
@@ -127,6 +128,14 @@ Options:
             end
 
             gabbr.export
+
+        case -r --reload
+            set -e global_abbreviations
+            set -U global_abbreviations
+
+            for abbr in (cat $gabbr_config)
+                set global_abbreviations $global_abbreviations "$abbr"
+            end
     end
 
     function gabbr.export
