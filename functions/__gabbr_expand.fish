@@ -13,7 +13,16 @@ function __gabbr_expand
     # expand global abbreviations
     for abbr in $global_abbreviations
         echo $abbr | read word phrase
-        if test "$word" = (commandline -t)
+        
+        if string match -q "*.$word" (commandline -t)
+            if string match -q -- '-x *' $phrase
+                set -l file (commandline -t)
+                if test 0 = (count (commandline -poc)) -a -f "$file" -a ! -x "$file"
+                    set -l cmd (string sub -s 4 -- $phrase)
+                    commandline -t "$cmd $file"
+                end
+            end
+        else if test "$word" = (commandline -t)
             if string match -q -- '-f *' $phrase
                 # --function option
                 set -l cmd (string sub -s 4 -- $phrase)

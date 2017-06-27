@@ -5,7 +5,7 @@ function gabbr -d 'Global abbreviation for fish'
     set -l args
     while count $argv >/dev/null
         switch $argv[1]
-            case -{a,f,s,l,e} --{add,function,show,list,erase}
+            case -{a,f,x,s,l,e} --{add,function,suffix,show,list,erase}
                 set opts $opts $argv[1]
 
             case -h --help
@@ -21,6 +21,7 @@ Options:
     -f, --function  Add function-abbreviation
     -l, --list      Print all abbreviation names
     -s, --show      Print all abbreviations
+    -x, --suffix    Add suffix-abbreviation
     -h, --help      Help
 "
                 return
@@ -52,7 +53,7 @@ Options:
 
     # execute
     switch $opts
-        case -a --add -f --function
+        case -a --add -f --function -x --suffix
             # argument number check
             if test (count $args) -lt 2
                 echo "$_: abbreviation must have a value" >&2
@@ -79,6 +80,8 @@ Options:
                     set global_abbreviations $global_abbreviations "$args"
                 case -f --function
                     set global_abbreviations $global_abbreviations "$args[1] -f $args[2..-1]"
+                case -x --suffix
+                    set global_abbreviations $global_abbreviations "$args[1] -x $args[2..-1]"
             end
 
         case -l --list
@@ -105,6 +108,8 @@ Options:
                 echo $abbr | read -l word phrase
                 if string match -q -- '-f *' $phrase
                     echo "gabbr $word -f "(string sub -s 4 -- $phrase | string escape)
+                else if string match -q -- '-x *' $phrase
+                    echo "gabbr $word -x "(string sub -s 4 -- $phrase | string escape)
                 else
                     echo "gabbr $word "(string escape -- $phrase)
                 end
