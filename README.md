@@ -43,7 +43,11 @@ gabbr (-f|--function) D 'date +%Y/%m/%d'
 
 ### `gabbr_config`
 
-`gabbr_config` is the file path for saving global abbreviations, which default value is `$HOME/.config/fish/.gabbr.conf` or `$XDG_CONFIG_HOME/fish/.gabbr.conf`.
+**optional**
+
+`$gabbr_config` is the file path for saving global abbreviation configurations.
+If `$gabbr_config` variable exists, `gabbr` output configurations to `$gabbr_config`.
+You can keep all abbreviations under git control by committing that file.
 
 [slack-link]: https://fisherman-wharf.herokuapp.com
 [slack-badge]: https://fisherman-wharf.herokuapp.com/badge.svg
