@@ -14,7 +14,7 @@ function __gabbr_expand
     for abbr in $global_abbreviations
         echo $abbr | read word phrase
         
-        if string match -q "*.$word" (commandline -t)
+        if string match -q -- "*.$word" (commandline -t)
             if string match -q -- '-x *' $phrase
                 set -l file (commandline -t)
                 if test 0 = (count (commandline -poc)) -a -f "$file" -a ! -x "$file"
