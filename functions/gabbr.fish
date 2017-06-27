@@ -5,7 +5,7 @@ function gabbr -d 'Global abbreviation for fish'
     set -l args
     while count $argv >/dev/null
         switch $argv[1]
-            case -{a,f,s,l,e} --{add,function,show,list,erase}
+            case -{a,f,s,l,e,r} --{add,function,show,list,erase,reload}
                 set opts $opts $argv[1]
 
             case -h --help
@@ -21,6 +21,7 @@ Options:
     -f, --function  Add function-abbreviation
     -l, --list      Print all abbreviation names
     -s, --show      Print all abbreviations
+    -r, --realod    Reload all abbreviations from your config file
     -h, --help      Help
 "
                 return
@@ -64,7 +65,7 @@ Options:
                 echo "$_: abbreviation cannot have spaces in the key" >&2
                 return 1
             end
-          
+
             # erase abbreviations
             gabbr --erase "$args[1]" ^/dev/null
 
@@ -80,6 +81,8 @@ Options:
                 case -f --function
                     set global_abbreviations $global_abbreviations "$args[1] -f $args[2..-1]"
             end
+
+            gabbr.export
 
         case -l --list
             # argument number check
@@ -123,5 +126,32 @@ Options:
                     echo "$_: no such abbreviation '$arg'" >&2
                 end
             end
+
+            gabbr.export
+
+        case -r --reload
+            if set -q gabbr_config
+                set global_abbreviations
+
+                for abbr in (cat $gabbr_config)
+                    set global_abbreviations $global_abbreviations "$abbr"
+                end
+            else
+                echo "$_: `\$gabbr_config` is undefined" >&2
+            end
+    end
+
+    function gabbr.export
+        if set -q gabbr_config
+            echo -n '' >$gabbr_config
+            for abbr in $global_abbreviations
+                echo $abbr | read -l word phrase
+                if string match -q -- '-f *' $phrase
+                    echo "$word -f "(string sub -s 4 -- $phrase) >>$gabbr_config
+                else
+                    echo "$word $phrase" >>$gabbr_config
+                end
+            end
+        end
     end
 end
