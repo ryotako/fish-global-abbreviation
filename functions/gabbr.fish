@@ -130,22 +130,27 @@ Options:
             gabbr.export
 
         case -r --reload
-            set -e global_abbreviations
-            set -U global_abbreviations
+            if set -q gabbr_config
+                set global_abbreviations
 
-            for abbr in (cat $gabbr_config)
-                set global_abbreviations $global_abbreviations "$abbr"
+                for abbr in (cat $gabbr_config)
+                    set global_abbreviations $global_abbreviations "$abbr"
+                end
+            else
+                echo "$_: `\$gabbr_config` is undefined" >&2
             end
     end
 
     function gabbr.export
-        echo -n '' >$gabbr_config
-        for abbr in $global_abbreviations
-            echo $abbr | read -l word phrase
-            if string match -q -- '-f *' $phrase
-                echo "$word -f "(string sub -s 4 -- $phrase) >>$gabbr_config
-            else
-                echo "$word $phrase" >>$gabbr_config
+        if set -q gabbr_config
+            echo -n '' >$gabbr_config
+            for abbr in $global_abbreviations
+                echo $abbr | read -l word phrase
+                if string match -q -- '-f *' $phrase
+                    echo "$word -f "(string sub -s 4 -- $phrase) >>$gabbr_config
+                else
+                    echo "$word $phrase" >>$gabbr_config
+                end
             end
         end
     end
