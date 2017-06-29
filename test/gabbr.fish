@@ -1,4 +1,4 @@
-set -g global_abbreviations
+set -gx global_abbreviations
 
 test "reset global_abbreviations"
     0 = (count (gabbr))
@@ -44,5 +44,3 @@ gabbr -f E 'echo DONE'
 test "gabbr -f E 'echo DONE'"
     "gabbr E -f 'echo DONE'" = (gabbr | string join ":")
 end
-
-set -e global_abbreviations
