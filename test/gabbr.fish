@@ -4,6 +4,10 @@ test "reset global_abbreviations"
     0 = (count (gabbr))
 end
 
+test "gabbr -h"
+    (count (gabbr -h)) -gt 0
+end
+
 gabbr G '| grep'
 
 test "gabbr G '| grep'"
