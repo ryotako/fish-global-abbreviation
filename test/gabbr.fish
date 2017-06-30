@@ -1,6 +1,6 @@
 
 function setup
-    set -g global_abbreviations
+    set -gx global_abbreviations
 end
 
 test "reset global_abbreviations"
