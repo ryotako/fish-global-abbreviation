@@ -36,21 +36,20 @@ end
 test "gabbr -e G"
     "gabbr L '| less'" = (\
         gabbr G '| grep' \
-        ; gabbr L '| less' \
-        ; gabbr -e G \
-        ; gabbr | string join ":")
+        ; and gabbr L '| less' \
+        ; and gabbr -e G \
+        ; and gabbr | string join ":")
 end
 
 test "gabbr --list"
     "L" = (\
         gabbr G '| grep' \
-        ; gabbr L '| less' \
-        ; gabbr -e G \
-        ; gabbr --list | string join ":")
+        ; and gabbr L '| less' \
+        ; and gabbr -e G \
+        ; and gabbr --list | string join ":")
 end
 
 test "gabbr -f E 'echo DONE'"
     "gabbr E -f 'echo DONE'" = (\
-    gabbr -f E 'echo DONE' \
-    ; gabbr | string join ":")
+        gabbr -f E 'echo DONE' ; and gabbr | string join ":")
 end
