@@ -4,4 +4,5 @@ before_install:
     - sudo apt-get update
     - sudo apt-get -y install fish
 script:
-    - fish test/gabbr.fish
+    - curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+    - fish -c "fisher fishtape .; . test/gabbr.fish"
