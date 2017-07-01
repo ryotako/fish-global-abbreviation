@@ -1,41 +1,73 @@
-begin
-    #
-    # utility for testing
-    #
-    set -l global_abbreviations
-    set -l __gabbr_test_count 0
-    function __gabbr_test -S -a preset want
-        set __gabbr_test_count (math $__gabbr_test_count + 1)
+#
+# setup
+#
 
-        commandline "$preset"
-        __gabbr_expand
+## backups
+set -q global_abbreviations
+and set -l __global_abbreviations $global_abbreviations
+set -q gabbr_config
+and set -l __gabbr_config $gabbr_config
 
-        set -l got (commandline)
-        if test "$want" = "$got"
-            echo -n (set_color green)"ok"(set_color normal)
-            echo " $__gabbr_test_count $preset -> $got"
-        else
-            echo -n (set_color red)"not ok"(set_color normal)
-            echo " $__gabbr_test_count $preset"
-            echo "    want: $want"
-            echo "    got : $got"
-        end
+## variable preparation
+set global_abbreviations
+set gabbr_config (dirname (status current-filename))"/.gabbr.config"
+set -l __gabbr_test_count 0
+set -l __gabbr_fail_count 0
 
-        commandline ""
+function __gabbr_expand_test -S -a preset expected
+    set __gabbr_test_count (math $__gabbr_test_count + 1)
+
+    commandline "$preset"
+    __gabbr_expand
+
+    set -l recieved (commandline)
+    if test "$expected" = "$recieved"
+        echo "ok $__gabbr_test_count $preset -> $recieved"
+    else
+        set __gabbr_fail_count (math $__gabbr_fail_count + 1)
+        echo "not ok $__gabbr_test_count $preset"
+        echo "    expected: $expected"
+        echo "    recieved: $recieved"
     end
 
-
-    #
-    # test
-    #
-    gabbr L '| less'
-    __gabbr_test "gabbr -h L" "gabbr -h | less"
-    __gabbr_test "LL" "LL"
-
-
-    gabbr -e L
-    __gabbr_test "gabbr -h L" "gabbr -h L"
-
-    gabbr D -f 'echo DONE'
-    __gabbr_test 'D' 'DONE'
+    commandline ""
 end
+
+#
+# test
+#
+
+gabbr L '| less'
+__gabbr_expand_test "gabbr -h L" "gabbr -h | less"
+__gabbr_expand_test "LL" "LL"
+
+
+gabbr -e L
+__gabbr_expand_test "gabbr -h L" "gabbr -h L"
+
+gabbr D -f 'echo DONE'
+__gabbr_expand_test 'D' 'DONE'
+
+#
+# teardown
+#
+
+set global_abbreviations $__global_abbreviations
+set gabbr_config $__gabbr_config
+
+if test "$__gabbr_test_count" -gt 0
+    echo
+    echo "1..$__gabbr_test_count"
+    echo "# tests $__gabbr_test_count"
+    echo "# pass  "(math $__gabbr_test_count - $__gabbr_fail_count)
+    echo "# fail  $__gabbr_fail_count"
+    if test "$__gabbr_fail_count" -eq 0
+        echo
+        echo "# ok"
+    end
+end
+
+if test "$__gabbr_fail_count" -gt 0
+    exit 1
+end
+

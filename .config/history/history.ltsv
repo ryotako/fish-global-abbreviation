@@ -1,0 +1,6 @@
+date:2017-06-30T14:16:34.88517597+09:00	command:. run.fish	dir:/Users/Ryota/.ghq/github.com/ryotako/fish-global-abbreviation	branch:test	status:0	hostname:kobayashiryouta-no-MacBook-Pro.local
+date:2017-06-30T14:17:01.208169496+09:00	command:fish ./run.fish	dir:/Users/Ryota/.ghq/github.com/ryotako/fish-global-abbreviation	branch:test	status:0	hostname:kobayashiryouta-no-MacBook-Pro.local
+date:2017-06-30T14:17:19.293523086+09:00	command:fish test/__gabbr_expand.fish	dir:/Users/Ryota/.ghq/github.com/ryotako/fish-global-abbreviation	branch:test	status:0	hostname:kobayashiryouta-no-MacBook-Pro.local
+date:2017-06-30T17:14:17.027557194+09:00	command:vim test/gabbr.fish	dir:/Users/Ryota/.ghq/github.com/ryotako/fish-global-abbreviation	branch:test	status:0	hostname:kobayashiryouta-no-MacBook-Pro.local
+date:2017-06-30T17:14:28.10506992+09:00	command:vim test/gabbr.fish	dir:/Users/Ryota/.ghq/github.com/ryotako/fish-global-abbreviation	branch:test	status:0	hostname:kobayashiryouta-no-MacBook-Pro.local
+date:2017-06-30T17:14:33.524425973+09:00	command:vim	dir:/Users/Ryota/.ghq/github.com/ryotako/fish-global-abbreviation	branch:test	status:0	hostname:kobayashiryouta-no-MacBook-Pro.local
