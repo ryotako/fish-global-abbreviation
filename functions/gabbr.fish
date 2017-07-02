@@ -143,6 +143,10 @@ Options:
 
     function gabbr.export
         if set -q gabbr_config
+            if not touch $gabbr_config ^/dev/null
+                echo "$_: `\$gabbr_config` is invalid"  >&2
+                return 1
+            end
             echo -n '' >$gabbr_config
             for abbr in $global_abbreviations
                 echo $abbr | read -l word phrase
