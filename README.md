@@ -1,6 +1,7 @@
 # fish-global-abbreviation
 
 [![Slack Room][slack-badge]][slack-link]
+[![Build Status][travis-badge]][travis-link]
 
 Global abbreviation for fish shell
 
@@ -49,6 +50,8 @@ gabbr (-f|--function) D 'date +%Y/%m/%d'
 If `$gabbr_config` variable exists, `gabbr` output configurations to `$gabbr_config`.
 You can keep all abbreviations under git control by committing that file.
 
+[travis-link]: https://travis-ci.org/ryotako/fish-global-abbreviation
+[travis-badge]: https://img.shields.io/travis/ryotako/fish-global-abbreviation.svg
 [slack-link]: https://fisherman-wharf.herokuapp.com
 [slack-badge]: https://fisherman-wharf.herokuapp.com/badge.svg
 [fisherman]: https://github.com/fisherman/fisherman
