@@ -17,7 +17,7 @@ function __gabbr_expand
         if string match -q -- "*.$word" (commandline -t)
             if string match -q -- '-x *' $phrase
                 set -l file (commandline -t)
-                if test 0 = (count (commandline -poc)) -a -f "$file" -a ! -x "$file"
+                if test 0 = (count (commandline -poc))
                     set -l cmd (string sub -s 4 -- $phrase)
                     commandline -t "$cmd $file"
                 end
