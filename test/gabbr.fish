@@ -40,7 +40,6 @@ test "list abbreviations"
         )
 end
 
-
 test "add function abbreviations"
     "gabbr E -f 'echo expanded'" = (
         gabbr --function E 'echo expanded'
@@ -48,12 +47,18 @@ test "add function abbreviations"
         )
 end
 
-
 test "reload abbereviations"
     G = (set -g gabbr_config (dirname (realpath $FILENAME))"/.gabbr.config"
         echo "G | grep" > "$gabbr_config"
         gabbr --reload
         gabbr --list
         rm "$gabbr_config"
+        )
+end
+
+test "add suffix alias"
+    "gabbr py -x python" = (
+        gabbr --suffix py python
+        gabbr --show
         )
 end

@@ -1,3 +1,13 @@
+if set -q TAP_VERSION
+    echo "#"
+    echo "# Fishtape is unavailable for __gabbr_expand.fish,"
+    echo "# because these test requires an interactive mode shell."
+    echo "#"
+    echo "# Run `source test/__gabbr_expand.fish` directly."
+    echo "#"
+    exit
+end
+
 #
 # setup
 #
@@ -34,19 +44,21 @@ function __gabbr_expand_test -S -a preset expected
 end
 
 #
-# test
+# tests
 #
 
 gabbr L '| less'
 __gabbr_expand_test "gabbr -h L" "gabbr -h | less"
 __gabbr_expand_test "LL" "LL"
 
-
 gabbr -e L
 __gabbr_expand_test "gabbr -h L" "gabbr -h L"
 
 gabbr D -f 'echo DONE'
 __gabbr_expand_test 'D' 'DONE'
+
+gabbr py -x python
+__gabbr_expand_test 'test.py' 'python test.py'
 
 #
 # teardown
