@@ -23,7 +23,9 @@ function __gabbr_expand
                 end
             end
         else if test "$word" = (commandline -t)
-            if string match -q -- '-f *' $phrase
+            if string match -q -- '-x *' $phrase
+                # do nothing
+            else if string match -q -- '-f *' $phrase
                 # --function option
                 set -l cmd (string sub -s 4 -- $phrase)
                 eval $cmd ^/dev/null | string join ' ' | read -l buf
