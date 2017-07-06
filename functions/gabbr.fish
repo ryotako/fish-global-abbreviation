@@ -21,7 +21,7 @@ Options:
     -f, --function  Add function-abbreviation
     -l, --list      Print all abbreviation names
     -s, --show      Print all abbreviations
-    -r, --realod    Reload all abbreviations from your config file
+    -r, --relaod    Reload all abbreviations from your config file
     -h, --help      Help
 "
                 return
@@ -69,7 +69,7 @@ Options:
             # erase abbreviations
             gabbr --erase "$args[1]" ^/dev/null
 
-            # use a global variable as default
+            # use a universal variable as default
             if not set -q global_abbreviations
                 set -U global_abbreviations
             end
