@@ -1,4 +1,4 @@
-funcrion setup
+function setup
     set -g global_abbreviations
 end
 
