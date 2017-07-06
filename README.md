@@ -38,6 +38,10 @@ gabbr (-r|--reload)
 # add function-abbreviation
 # Function-abbreviations are evaluated when they are expanded.
 gabbr (-f|--function) D 'date +%Y/%m/%d'
+
+# add suffix-abbreviation
+# Suffix-abbreviations work in the same way as zsh's suffix aliases.
+gabbr (-x|--suffix) py python
 ```
 
 ## Setup
