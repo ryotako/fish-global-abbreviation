@@ -32,7 +32,7 @@ Options:
                     set -e $argv[2]
                 end
             case '-*'
-                echo "$_: invalid option -- $argv[1]" >&2
+                echo "gabbr: invalid option -- $argv[1]" >&2
                 return 1
             case '*'
                 set args $args $argv[1]
@@ -43,7 +43,7 @@ Options:
 
     # check option-conflict
     if test (count $opts) -gt 1
-        echo "$_: $opts[2] cannot be specified along with $opts[1]" >&2
+        echo "gabbr: $opts[2] cannot be specified along with $opts[1]" >&2
         return 1
     else if not count $opts >/dev/null
         # default behavior
@@ -57,13 +57,13 @@ Options:
         case -a --add -f --function -x --suffix
             # argument number check
             if test (count $args) -lt 2
-                echo "$_: abbreviation must have a value" >&2
+                echo "gabbr: abbreviation must have a value" >&2
                 return 1
             end
 
             # key value check
             if string match '* *' "$args[1]"
-                echo "$_: abbreviation cannot have spaces in the key" >&2
+                echo "gabbr: abbreviation cannot have spaces in the key" >&2
                 return 1
             end
 
@@ -90,7 +90,7 @@ Options:
         case -l --list
             # argument number check
             if count $args >/dev/null
-                echo "$_: unexpected argument -- $args[1]" >&2
+                echo "gabbr: unexpected argument -- $args[1]" >&2
                 return 1
             end
 
@@ -103,7 +103,7 @@ Options:
         case -s --show
             # argument number check
             if count $args >/dev/null
-                echo "$_: unexpected argument -- $args[1]" >&2
+                echo "gabbr: unexpected argument -- $args[1]" >&2
                 return 1
             end
 
@@ -128,7 +128,7 @@ Options:
                         end
                     end
                 else
-                    echo "$_: no such abbreviation '$arg'" >&2
+                    echo "gabbr: no such abbreviation '$arg'" >&2
                 end
             end
 
@@ -142,14 +142,14 @@ Options:
                     set global_abbreviations $global_abbreviations "$abbr"
                 end
             else
-                echo "$_: `\$gabbr_config` is undefined" >&2
+                echo "gabbr: `\$gabbr_config` is undefined" >&2
             end
     end
 
     function gabbr.export
         if set -q gabbr_config
             if not touch $gabbr_config ^/dev/null
-                echo "$_: `\$gabbr_config` is invalid"  >&2
+                echo "gabbr: `\$gabbr_config` is invalid"  >&2
                 return 1
             end
             echo -n '' >$gabbr_config
