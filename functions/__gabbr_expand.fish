@@ -1,5 +1,9 @@
 function __gabbr_expand
 
+    if test (string trim (commandline -b)) = ''
+        return
+    end
+
     # expand abbreviations
     if test 0 = (count (commandline -poc))
         for abbr in $fish_user_abbreviations
@@ -13,7 +17,7 @@ function __gabbr_expand
     # expand global abbreviations
     for abbr in $global_abbreviations
         echo $abbr | read word phrase
-        
+
         if string match -q -- "*.$word" (commandline -t)
             if string match -q -- '-x *' $phrase
                 set -l file (commandline -t)
