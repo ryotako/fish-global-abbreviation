@@ -1,6 +1,5 @@
 # fish-global-abbreviation
 
-[![Slack Room][slack-badge]][slack-link]
 [![Build Status][travis-badge]][travis-link]
 
 Global abbreviation for fish shell
