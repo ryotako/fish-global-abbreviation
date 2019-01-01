@@ -11,7 +11,7 @@ Global abbreviation for fish shell
 With [fisherman]
 
 ```
-fisher ryotako/fish-global-abbreviation
+fisher add ryotako/fish-global-abbreviation
 ```
 
 ## Usage
