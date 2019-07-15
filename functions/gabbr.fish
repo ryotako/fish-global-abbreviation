@@ -136,6 +136,10 @@ Options:
 
         case -r --reload
             if set -q gabbr_config
+                # use a universal variable as default
+                if not set -q global_abbreviations
+                    set -U global_abbreviations
+                end
                 set global_abbreviations
 
                 for abbr in (cat $gabbr_config)
@@ -149,7 +153,7 @@ Options:
     function gabbr.export
         if set -q gabbr_config
             if not touch $gabbr_config ^/dev/null
-                echo "gabbr: `\$gabbr_config` is invalid"  >&2
+                echo "gabbr: `\$gabbr_config` is invalid" >&2
                 return 1
             end
             echo -n '' >$gabbr_config
