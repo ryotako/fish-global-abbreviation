@@ -2,63 +2,52 @@ function setup
     set -g global_abbreviations
 end
 
-test "add an abbreviation"
-    "G" = (
+@test "add an abbreviation" (
+    gabbr --add G '| grep'
+    gabbr --list
+) = "G"
+
+@test "count abbreviations" (
+    count (
         gabbr --add G '| grep'
         gabbr --list
-        )
-end
+    )
+) -eq 1
 
-test "count abbreviations"
-    1 = (count (
-        gabbr --add G '| grep'
-        gabbr --list
-        ))
-end
-
-test "erase an abbreviation"
-    0 = (count (
+@test "erase an abbreviation" (
+    count (
         gabbr --add G '| grep'
         gabbr --erase G
         gabbr --list
-        ))
-end
+    )
+) -eq 0
 
-test "show abbreviations"
-    "gabbr G '| grep'" "gabbr L '| less'" = (
-        gabbr --add G '| grep'
-        gabbr --add L '| less'
-        gabbr --show
-        )
-end
+@test "show abbreviations" (
+    gabbr --add G '| grep'
+    gabbr --add L '| less'
+    gabbr --show
+) = "gabbr G '| grep'" "gabbr L '| less'"
 
-test "list abbreviations"
-    G L = (
-        gabbr --add G '| grep'
-        gabbr --add L '| less'
-        gabbr --list
-        )
-end
+@test "list abbreviations" (
+    gabbr --add G '| grep'
+    gabbr --add L '| less'
+    gabbr --list
+) = G L
 
-test "add function abbreviations"
-    "gabbr E -f 'echo expanded'" = (
-        gabbr --function E 'echo expanded'
-        gabbr --show
-        )
-end
+@test "add function abbreviations" (
+    gabbr --function E 'echo expanded'
+    gabbr --show
+) = "gabbr E -f 'echo expanded'"
 
-test "reload abbereviations"
-    G = (set -g gabbr_config (dirname (realpath $FILENAME))"/.gabbr.config"
-        echo "G | grep" > "$gabbr_config"
-        gabbr --reload
-        gabbr --list
-        rm "$gabbr_config"
-        )
-end
+@test "reload abbereviations" (
+    set -g gabbr_config (dirname (realpath $current_filename))"/.gabbr.config"
+    echo "G | grep" > "$gabbr_config"
+    gabbr --reload
+    gabbr --list
+    rm "$gabbr_config"
+) = G
 
-test "add suffix alias"
-    "gabbr py -x python" = (
-        gabbr --suffix py python
-        gabbr --show
-        )
-end
+@test "add suffix alias" (
+    gabbr --suffix py python
+    gabbr --show
+) = "gabbr py -x python"
