@@ -40,12 +40,21 @@ end
 ) = "gabbr E -f 'echo expanded'"
 
 @test "reload abbereviations" (
-    set -g gabbr_config (dirname (realpath $current_filename))"/.gabbr.config"
+    set -g gabbr_config $current_dirname/.gabbr.config
     echo "G | grep" > "$gabbr_config"
     gabbr --reload
     gabbr --list
     rm "$gabbr_config"
 ) = G
+
+@test 'reload abbereviations when $global_abbreviations is not set' (
+    unset global_abbreviations
+    set -g gabbr_config $current_dirname/.gabbr.config
+    echo "F | fzf" > "$gabbr_config"
+    fish -c "set -g gabbr_config $gabbr_config && gabbr --reload"
+    gabbr --list
+    rm "$gabbr_config"
+) = F
 
 @test "add suffix alias" (
     gabbr --suffix py python
