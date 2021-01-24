@@ -8,10 +8,10 @@ Global abbreviation for fish shell
 
 ## Install
 
-With [fisherman]
+With [fisher]
 
 ```
-fisher add ryotako/fish-global-abbreviation
+fisher install ryotako/fish-global-abbreviation
 ```
 
 ## Usage
@@ -55,6 +55,4 @@ You can keep all abbreviations under git control by committing that file.
 
 [travis-link]: https://travis-ci.org/ryotako/fish-global-abbreviation
 [travis-badge]: https://img.shields.io/travis/ryotako/fish-global-abbreviation.svg
-[slack-link]: https://fisherman-wharf.herokuapp.com
-[slack-badge]: https://fisherman-wharf.herokuapp.com/badge.svg
-[fisherman]: https://github.com/fisherman/fisherman
+[fisher]: https://github.com/jorgebucaran/fisher
